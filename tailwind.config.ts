@@ -65,25 +65,38 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "heartbeat": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { 
+            filter: "brightness(1) drop-shadow(0 0 10px hsl(var(--heart-red) / 0.6))" 
           },
-          to: {
-            height: "0",
+          "50%": { 
+            filter: "brightness(1.3) drop-shadow(0 0 20px hsl(var(--heart-red) / 0.9))" 
           },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)", opacity: "0" },
+          "10%": { opacity: "1" },
+          "90%": { opacity: "1" },
+          "100%": { transform: "translateY(-100vh)", opacity: "0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "heartbeat": "heartbeat 1.5s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 1.5s ease-in-out infinite",
+        "float": "float linear infinite",
       },
     },
   },
