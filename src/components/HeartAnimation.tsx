@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 const HeartAnimation = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
+  const starsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -81,15 +82,51 @@ const HeartAnimation = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!starsRef.current) return;
+
+    const starsContainer = starsRef.current;
+    const stars: HTMLDivElement[] = [];
+    const numStars = 100;
+
+    // Create twinkling stars
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 3}s`;
+      star.style.animationDuration = `${2 + Math.random() * 2}s`;
+      
+      starsContainer.appendChild(star);
+      stars.push(star);
+    }
+
+    // Cleanup
+    return () => {
+      stars.forEach(star => star.remove());
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
+    <div className="fixed inset-0 flex flex-col items-center justify-center overflow-hidden gap-8">
+      {/* Stars background */}
+      <div ref={starsRef} className="absolute inset-0 pointer-events-none z-0" />
+      
       {/* Particles container */}
       <div ref={particlesRef} className="absolute inset-0 pointer-events-none z-0" />
+      
+      {/* Birthday text - top */}
+      <div className="relative z-20 text-center px-4">
+        <h2 className="birthday-text select-none text-4xl md:text-5xl">
+          ¡Feliz Cumpleaños!
+        </h2>
+      </div>
       
       {/* Heart container */}
       <div 
         ref={containerRef} 
-        className="relative w-full h-full heartbeat-animation"
+        className="relative w-full h-[60vh] heartbeat-animation flex-shrink-0"
         style={{ 
           filter: "drop-shadow(0 0 30px hsl(0 100% 50% / 0.3))"
         }}
@@ -100,6 +137,16 @@ const HeartAnimation = () => {
             Antho
           </h1>
         </div>
+      </div>
+
+      {/* Birthday text - bottom */}
+      <div className="relative z-20 text-center px-4">
+        <p className="text-xl md:text-2xl font-semibold" style={{
+          color: '#ffd700',
+          textShadow: '0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3)'
+        }}>
+          Que este día esté lleno de amor y alegría ✨
+        </p>
       </div>
     </div>
   );
