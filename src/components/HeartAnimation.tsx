@@ -140,12 +140,13 @@ const HeartAnimation = () => {
       </div>
 
       {/* Birthday text - bottom */}
-      <div className="relative z-20 text-center px-4">
-        <p className="text-xl md:text-2xl font-semibold" style={{
+      <div className="relative z-20 text-center px-4 max-w-3xl">
+        <p className="text-lg md:text-xl font-semibold leading-relaxed" style={{
           color: '#ffd700',
           textShadow: '0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3)'
         }}>
-          Que este día esté lleno de amor y alegría ✨
+          Feliz cumple, Antho.<br />
+          Sabes que tu nombre late en mi pecho como un fuego que nunca se apaga
         </p>
       </div>
     </div>
